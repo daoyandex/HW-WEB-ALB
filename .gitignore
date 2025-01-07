@@ -1,5 +1,5 @@
-./addons
-./.terraform
+addons/
+.terraform/
 README*
 *.backup
 *.json
