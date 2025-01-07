@@ -1,0 +1,6 @@
+./addons/*
+./.terraform
+README*
+*.backup
+*.json
+*.txt

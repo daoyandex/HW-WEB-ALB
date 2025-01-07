@@ -1,0 +1,7 @@
+#cloud-config
+users:
+  - name: yc-user
+    shell: /bin/bash
+    sudo: ALL=(ALL:ALL) NOPASSWD:ALL
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC5NA3NCRw4/hwui5smIAJthiw56mN0yCHaeFmkrhPHr23kcs97AlWDeMgbIgnXdZChOiPPFWzwP4ahe8Oaqe+DgKEXBMz7uiKRw/56rSVtAM8TvyjLZXGeWodP2kj09ZifYxgnlLtZDBirL9c8blycqoQAQ20c1CqPMXdk65yDjx0ceSbnzk+Bc0JCiQyR2P/5+sTV0QsLUdYDLf7Py9p1v0L2j+Eq5KoiXDml3OqiVXfHe7YLqM3f43jxdGw20Clv+a5HhCn0iGWAYcXgxic9tyTxN4Bsje86MACiKcDbr6zXbQZMaBROeoc//nEJbxBe6yyxTvlaOPdzF7KVF+qQnh9W010HsARg/cU4QlsrlrLiJwhuiVKjb2Uqt4kYRROgcVYVp7HcUoOWQyfDx2HCrjTB6UCvYWG7RlQGXomXDHgdXuLfha5CmgBJjv+GGhXnmsGlD9H+nyqxhG0wxBfMzcrITWVsTLpS+dBKq61O9dj5Asffh/6z2+/ejFCe4nM= user@debian

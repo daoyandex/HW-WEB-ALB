@@ -1,0 +1,29 @@
+#cloud-config
+timezone: Europe/Moscow
+repo_update: true
+repo_upgrade: true
+
+users:
+  - name: yc-user
+    shell: /bin/bash
+    sudo: ALL=(ALL:ALL) NOPASSWD:ALL
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKSUQ22GF6/ro5opbkl11cg6VViCrH4CnmSzDRzwTVWoxiNZzh/9bc5MJR8I6D8rI7pl0ltyPx5BQcPQvEYk/fHBvarxjAjxjg/zRh/S6dOq9lhnmAXkVxYOUGDPPI1G52DmaziPLU1hmt3cHu1GBm64p4Bu0pvl55GEk1pgNBLHVJlaKKPZAjiTTnGsOHfbxUKxr+CnBIitfDXRHAocMZ8c4OUKcpqw9dCdgcY8z65rwz/xoGg5rVg9feSSjVxYKFlTQOcC2fM+Ilalw97se7mKcy+C5G7H5dfy12efwYNw8Stb8uq1g0t8WLYS3VOseeVn4W2/h3L/LnRvtOCDLV user@debian
+
+write_files:
+  - path: "/usr/local/etc/startup_nginx.sh"
+    permissions: "755"
+    content: |
+      #!/bin/bash
+
+      sudo apt-get update
+      sudo apt-get install -y nginx
+      sudo service nginx start
+    defer: true
+
+runcmd:
+  - ["/usr/local/etc/startup_nginx.sh"]
+  - [ systemctl, nginx-reload ]
+  - [ systemctl, enable, nginx.service ]
+  - [ systemctl, start, --no-block, nginx.service ]
+  - [ sh, -c, "echo $(hostname | cut -d '.' -f 1 ) > /var/www/html/index.html" ]
