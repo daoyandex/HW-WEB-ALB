@@ -33,6 +33,10 @@ variable "boot_disk_image_id" {
   description = "Type id for Boot disk image (lets gess)"
   default = "fd870suu28d40fqp8srr" #"fd87kbts7j40q5b9rpjr"
 }
+variable "boot_disk_image_debian_12" {
+  description = "Type id for Boot disk image (lets gess)"
+  default = "fd80db1e30l1di9umq8v" #
+}
 
 variable "main_zone" {
   description = "Yandex Cloud default Zone for provisoned resources"

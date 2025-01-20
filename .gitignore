@@ -1,4 +1,7 @@
+img/
 addons/
+Ansible/
+passwd.yml
 .terraform/
 .terraform*
 README*
