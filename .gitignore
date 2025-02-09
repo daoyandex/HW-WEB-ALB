@@ -1,6 +1,5 @@
 img/
 addons/
-Ansible/
 passwd.yml
 .terraform/
 .terraform*
@@ -8,3 +7,4 @@ README*
 *.backup
 *.json
 *.txt
+*.deb

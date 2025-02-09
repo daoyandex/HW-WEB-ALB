@@ -1,0 +1,5 @@
+---
+- hosts: localhost
+  remote_user: yc-user
+  roles:
+    - role_elasticsearch_server

@@ -1,0 +1,7 @@
+---
+- name: install Nginx, Zabbix and Postgres
+  hosts: web_vm
+  become: yes
+
+  roles: 
+    - { role: role_web_vm, when: ansible_system == 'Linux' }

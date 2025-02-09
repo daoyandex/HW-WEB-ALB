@@ -1,0 +1,7 @@
+---
+- name: install Kibana
+  hosts: kibana_server
+  become: yes
+
+  roles: 
+    - { role: role_kibana_server, when: ansible_system == 'Linux' }

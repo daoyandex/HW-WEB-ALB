@@ -1,0 +1,7 @@
+---
+- name: install Elasticsearch
+  hosts: elasticsearch_server
+  become: yes
+
+  roles: 
+    - { role: role_elasticsearch_server, when: ansible_system == 'Linux' }

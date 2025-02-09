@@ -1,0 +1,17 @@
+---
+# defaults file for role_elasticsearch_server
+#PATH_ES_CONFIG: /etc/elasticsearch/elasticsearch.yml
+#DIRECTORY: /tmp/elasticsearch
+
+
+TMP_DIR: /tmp/elasticsearch
+ES_DEB_FILE: "elasticsearch.deb"
+
+elasticsearch_http_port: 9200
+elasticsearch_path_home: "/usr/share/elasticsearch"
+elasticsearch_path_etc: "/etc/elasticsearch"
+elasticsearch_tls_cert_ca_pass: ""
+elasticsearch_tls_cert_pass: ""
+elasticsearch_tls_cert_dir: "certs"
+elasticsearch_user: "elasticsearch"
+elasticsearch_user_group: "elasticsearch"

@@ -1,0 +1,86 @@
+---
+# tasks file for role_kibana_server
+
+## 1 временный каталог, куда будут закопированы установочный файл kibana
+- name: Make temp folder for kibana
+  ansible.builtin.file:
+    path: "{{ kibana_tmp_folder }}"
+    state: directory
+    mode: '0755'
+    owner: yc-user
+    group: yc-user
+
+## 2 копируем в созданный временный каталог установочный файл kibana
+- name: copy kibana*.deb
+  ansible.builtin.copy:
+    #src: "kibana-8.15.2-amd64.deb"
+    src: "kibana-8.17.1-amd64.deb"
+    dest: "{{ kibana_tmp_folder }}/kibana.deb"
+    owner: yc-user
+    group: yc-user
+    mode: '0755'
+
+## 3 копируем в созданный временный каталог credentials elasticsearch - elastic_passwd
+- name: copy elastic_passwd.txt
+  ansible.builtin.copy:
+    src: "elastic_passwd.txt"
+    dest: "{{ kibana_tmp_folder }}/elastic_passwd.txt"
+    owner: yc-user
+    group: yc-user
+    mode: '0755'
+
+### 3 копируем в созданный временный каталог credentials elasticsearch - elastic_passwd
+#- name: copy kibana_system_passwd.txt
+#  ansible.builtin.copy:
+#    src: "kibana_system_passwd.txt"
+#    dest: "{{ kibana_tmp_folder }}/kibana_system_passwd.txt"
+#    owner: yc-user
+#    group: yc-user
+#    mode: '0755'
+
+## 4 копируем в созданный временный каталог credentials elasticsearch - elastic_ca_fingerprint
+- name: copy elastic_ca_fingerprint.txt
+  ansible.builtin.copy:
+    src: "elastic_ca_fingerprint.txt"
+    dest: "{{ kibana_tmp_folder }}/elastic_ca_fingerprint.txt"
+    owner: yc-user
+    group: yc-user
+    mode: '0755'
+
+## 4 копируем в созданный временный каталог credentials elasticsearch - elastic_kibana_enrollment_token
+- name: copy elastic_kibana_enrollment_token.txt
+  ansible.builtin.copy:
+    src: "elastic_kibana_enrollment_token.txt"
+    dest: "{{ kibana_tmp_folder }}/elastic_kibana_enrollment_token.txt"
+    owner: yc-user
+    group: yc-user
+    mode: '0755'
+
+## 5 скрипт установки kibana
+- name: install kibana
+  ansible.builtin.script: 01_install_kibana.sh
+
+## 6 task update && upgrade
+- name: Update packages #2
+  apt:
+    upgrade: yes
+    update_cache: yes
+
+## 7 запускаем службу kibana
+- name: Start kibana
+  ansible.builtin.service:
+    name: kibana
+    state: started
+    enabled: yes
+
+## 8 далее шаги конфигурирования kibana
+- name: configure kibana
+  ansible.builtin.script: 02_configure_kibana.sh
+
+- name: Restart kibana
+  ansible.builtin.service:
+    name: kibana
+    state: restarted
+    enabled: yes
+
+

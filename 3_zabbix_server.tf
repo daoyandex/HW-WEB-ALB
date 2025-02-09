@@ -23,7 +23,7 @@ resource "yandex_compute_instance" "zabbix-server" {
     resources {
         cores  = 2
         core_fraction = 20
-        memory = 1
+        memory = 2
     }
 
     network_interface {
@@ -33,8 +33,8 @@ resource "yandex_compute_instance" "zabbix-server" {
     }
 
     metadata = { 
-      ssh-keys = "${var.vm_user}:${file("${var.ssh_key_path}")}"
-      user-data  = "${file("./web-vm-bootstrap/user.yaml")}"
+        ssh-keys = "${var.vm_user}:${file("${var.ssh_key_path}")}"
+        user-data  = "${file("./web-vm-bootstrap/user.yaml")}"
     }
 }
 ##########################################################################################

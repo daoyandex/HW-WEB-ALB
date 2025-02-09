@@ -1,0 +1,5 @@
+---
+# defaults file for role_web_vm_filebeat
+filebeat_tmp_folder: /tmp/filebeat
+filebeat_DEB_FILE: "filebeat.deb"
+filebeat_modules_folder: /etc/filebeat/modules.d

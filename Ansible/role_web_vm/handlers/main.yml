@@ -1,0 +1,12 @@
+---
+# handlers file for role_web_vm
+
+- name: Restart Nginx
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+
+- name: Restart Zabbix-agent
+  ansible.builtin.service:
+    name: zabbix-agentd
+    state: restarted

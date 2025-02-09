@@ -1,0 +1,39 @@
+---
+# tasks file for zabbix_server
+## 1 блок установки для zabbix
+- name: mk temp dir for zabbix repository
+  ansible.builtin.file:
+    path: /tmp/zabbix_repo_info
+    state: directory
+    mode: '0755'
+    owner: yc-user
+    group: yc-user
+
+- name: install zabbix repository
+  ansible.builtin.script: install_zabbix_repository.sh
+
+#- name: Update packages
+#  ansible.builtin.apt:
+#    upgrade: yes
+#    update_cache: yes
+
+- name: Install Zabbix server, frontend, agent
+  ansible.builtin.apt:
+    name: zabbix-server-pgsql, zabbix-frontend-php, php8.2-pgsql, zabbix-apache-conf, zabbix-sql-scripts, zabbix-agent
+    state: latest
+  notify: Restart Zabbix-server
+
+- name: prepare postgres users 'postgres', 'zabbix', prepare 'zabbix' database
+  ansible.builtin.script: prepare_postgres.sh
+  #notify: Restart Zabbix-server
+
+- name: restart zabbix and web-server services
+  ansible.builtin.service:
+    name: "{{ item }}"
+    enabled: true
+    state: restarted
+  with_items: 
+    - "zabbix-server"
+    - "zabbix-agent"
+    - "apache2"
+

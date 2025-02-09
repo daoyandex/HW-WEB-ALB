@@ -1,0 +1,7 @@
+---
+- name: install Zabbix and Postgres
+  hosts: zabbix_server
+  become: yes
+
+  roles: 
+    - { role: role_zabbix_server, when: ansible_system == 'Linux' }

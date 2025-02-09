@@ -1,0 +1,80 @@
+---
+# tasks file for role_web_vm_filebeat
+- name: Check if TMP_DIR exists
+  stat:
+    path: "{{ filebeat_tmp_folder }}"
+  register: result_tmp_folder
+
+- name: Check if Filebeat_DEB_FILE exists
+  stat:
+    path: "{{ filebeat_tmp_folder }}/{{ filebeat_DEB_FILE }}"
+  register: result_filebeat_deb_file
+
+## 1 временный каталог, куда будут закопированы установочный файл elasticsearch
+- name: Make temp dir for filebeat
+  ansible.builtin.file:
+    path: "{{ filebeat_tmp_folder }}"
+    state: directory
+    mode: '0755'
+    owner: yc-user
+    group: yc-user
+  when: not result_tmp_folder.stat.exists
+
+## 2 копируем в созданный временный каталог установочный файл elasticsearch
+- name: copy filebeat*.deb
+  ansible.builtin.copy:
+    #src: "filebeat-8.15.3-amd64.deb"
+    src: "filebeat-8.17.1-amd64.deb"
+    dest: "{{ filebeat_tmp_folder }}/filebeat.deb"
+    owner: yc-user
+    group: yc-user
+    mode: '0755'
+  when: not result_filebeat_deb_file.stat.exists
+
+## 3 копируем в созданный временный каталог credentials elasticsearch - elastic_passwd
+- name: copy elastic_passwd.txt
+  ansible.builtin.copy:
+    src: "elastic_passwd.txt"
+    dest: "{{ filebeat_tmp_folder }}/elastic_passwd.txt"
+    owner: yc-user
+    group: yc-user
+    mode: '0755'
+
+## 4 копируем в созданный временный каталог credentials elasticsearch - elastic_ca_fingerprint
+- name: copy elastic_ca_fingerprint.txt
+  ansible.builtin.copy:
+    src: "elastic_ca_fingerprint.txt"
+    dest: "{{ filebeat_tmp_folder }}/elastic_ca_fingerprint.txt"
+    owner: yc-user
+    group: yc-user
+    mode: '0755'
+
+## 5 скрипт установки filebeat
+- name: install filebeat
+  ansible.builtin.script: 01_install_filebeat.sh
+
+## 6 скрипт настройки filebeat
+- name: configure filebeat
+  ansible.builtin.script: 02_configure_filebeat.sh
+
+## 7 активация модуля для Nginx filebeat
+- name: Generate active filebeat Nginx module
+  template:
+    src: "filebeat_nginx.yml.j2"
+    dest: "{{ filebeat_modules_folder }}/nginx.yml"
+    mode: '0644'
+
+## 8 перезапускаем службу filebeat
+- name: Start filebeat
+  ansible.builtin.service:
+    name: filebeat
+    state: restarted
+    enabled: yes
+
+## 9 настройка activities filebeat
+- name: setup filebeat actives
+  ansible.builtin.script: 03_setup_filebeat_actives.sh
+  notify: Restart filebeat
+
+
+

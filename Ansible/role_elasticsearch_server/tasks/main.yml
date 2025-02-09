@@ -1,0 +1,52 @@
+---
+# tasks file for role_elasticsearch_server
+- name: Check if TMP_DIR exists
+  stat:
+    path: "{{ TMP_DIR }}"
+  register: result_tmp_dir
+
+- name: Check if ES_DEB_FILE exists
+  stat:
+    path: "{{ TMP_DIR }}/{{ ES_DEB_FILE }}"
+  register: result_es_deb_file
+
+## 1 временный каталог, куда будут закопированы установочный файл elasticsearch
+- name: Make temp dir for elasticsearch
+  ansible.builtin.file:
+    path: /tmp/elasticsearch
+    state: directory
+    mode: '0755'
+    owner: yc-user
+    group: yc-user
+  when: not result_tmp_dir.stat.exists
+
+## 2 копируем в созданный временный каталог установочный файл elasticsearch
+- name: Copy elasticsearch*.deb
+  ansible.builtin.copy:
+    #src: "elasticsearch-8.15.2-amd64.deb"
+    src: "elasticsearch-8.17.1-amd64.deb"
+    dest: "/tmp/elasticsearch/elasticsearch.deb"
+    owner: yc-user
+    group: yc-user
+    mode: '0755'
+  when: not result_es_deb_file.stat.exists
+
+## 3 скрипт установки elasticsearch
+- name: Install elasticsearch
+  ansible.builtin.script: 01_install_elasticsearch.sh
+
+## 4 скрипт настройки elasticsearch
+- name: Configure elasticsearch
+  ansible.builtin.script: 02_configure_elasticsearch.sh
+
+## 5 запускаем службу elasticsearch
+- name: Start elasticsearch
+  ansible.builtin.service:
+    name: elasticsearch
+    state: started
+    enabled: yes
+
+## 6 скрипт пароля и токенов elasticsearch
+- name: credentials elasticsearch
+  ansible.builtin.script: 03_credentials_elasticsearch.sh
+  become: true

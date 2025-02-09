@@ -1,0 +1,40 @@
+---
+# tasks file for role_web_vm
+# установка Nginx
+- name: Install Nginx
+  ansible.builtin.apt:
+    name: nginx
+    state: latest
+
+- name: mk temp dir for zabbix repository
+  ansible.builtin.file:
+    path: /tmp/zabbix_repo_info
+    state: directory
+    mode: '0755'
+    owner: yc-user
+    group: yc-user
+
+- name: install zabbix repository
+  ansible.builtin.script: install_zabbix_repository.sh
+
+- name: Install Zabbix agent
+  ansible.builtin.apt:
+    name: zabbix-agent
+    state: latest
+
+- name: Generate script for zabbix_agentd.conf
+  template:
+    src: "settings_zabbix_agentd_conf.j2"
+    dest: "{{ folder_for_Z_A_script }}/settings_zabbix_agentd.sh"
+    mode: '0755'
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: /etc/zabbix/zabbix_agentd.conf
+    dest: /etc/zabbix/zabbix_agentd_conf.backup
+
+
+- name: Execute the script
+  command: sh {{ folder_for_Z_A_script }}/settings_zabbix_agentd.sh
+
+

@@ -1,0 +1,6 @@
+---
+# handlers file for zabbix_server
+- name: Restart Zabbix-server
+  ansible.builtin.service:
+    name: zabbix-server
+    state: restarted

@@ -1,5 +1,5 @@
 #############################################################################
-## Здесь инициализация 2-х ВМ
+## Здесь инициализация Бастион-хоста
 resource "yandex_compute_instance" "bastion-host" {
     zone = "ru-central1-a"
     name     = "bastion-host"
@@ -14,16 +14,16 @@ resource "yandex_compute_instance" "bastion-host" {
     boot_disk {
         mode = "READ_WRITE"
         initialize_params {
-            image_id = yandex_compute_image.lemp.id
+            image_id = var.boot_disk_image_debian_12
             type = "network-hdd"
-            size = 3
+            size = 5
         }
     }
 
     resources {
         cores  = 2
         core_fraction = 20
-        memory = 1
+        memory = 2
     }
 
     network_interface {
@@ -33,8 +33,8 @@ resource "yandex_compute_instance" "bastion-host" {
     }
 
     metadata = { 
-      ssh-keys = "${var.vm_user}:${file("${var.ssh_key_path}")}"
-      user-data  = "${file("./web-vm-bootstrap/user.yaml")}"
+        ssh-keys = "${var.vm_user}:${file("${var.ssh_key_path}")}"
+        user-data  = "${file("./web-vm-bootstrap/user.yaml")}"
     }
 }
 #############################################################################
