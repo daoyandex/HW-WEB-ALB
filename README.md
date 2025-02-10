@@ -118,9 +118,9 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 2. Для установки ПО на виртуальные машины системы используется ряд ролей во вложенном каталоге Ansible.  
 3. Порядок установки ПО - регламентированный, поскольку меются зависимости. Например, установка Kibana и Filebeat выполняется строго после установки Elasticsearch и опирается на соответствующие параметры аутентификации (пользователь elastic и его пароль, отпечаток сертификата CA Elasticsearch, enrollment token для Kibana).  
     3.1. Для соблюдения правильного порядка установки ПО предусмотрен управляющий скрипт  
-        [Управляющий скрипт](Ansible/Ansible_control_script.sh)
+        ![Управляющий скрипт](Ansible/Ansible_control_script.sh)
     3.2. В процессе получения elasticsearch credentials применяется копирование данных на управляющую машину (домшний ноутбук) через бастионный хост с последующим копированием нужных данных в каталоги ролей для сервера Kibana и машин группы web-серверов.
-        [Скрипт получения elasticsearch credentials](Ansible/4_script_scp_elasticsearch_credentials.sh.sh)
+        ![Скрипт получения elasticsearch credentials](Ansible/4_script_scp_elasticsearch_credentials.sh.sh)
 
 4. Application load balancer
 http://158.160.162.4/
@@ -136,22 +136,22 @@ zabbix
  
 
 ## 2. Скриншоты ресурсов  
-2.1. Карта облачной сети
-[VPC_Map](img/VPC_Map.png)
+2.1. Карта облачной сети  
+![VPC_Map](img/VPC_Map.png)
 
-2.2. Балансировщик L-7 уровня
-[Application load balancer](img/Application_load_balancer.png)
-[ALB specification](img/ALB_specification.png)
+2.2. Балансировщик L-7 уровня  
+![Application load balancer](img/Application_load_balancer.png)  
+![ALB specification](img/ALB_specification.png)  
 
-2.3. Полный перечень созданных ВМ:  
-[Полный перечень ВМ](img/VM_full_list.png)
+2.3. Полный перечень созданных ВМ:   
+![Полный перечень ВМ](img/VM_full_list.png)
 
-2.2. Расписание снэпшотов дисков
-[Расписание снэпшотов дисков](img/Disks_Snapshot_Schedule.png)
+2.2. Расписание снэпшотов дисков  
+![Расписание снэпшотов дисков](img/Disks_Snapshot_Schedule.png)
 
 ## 3. Публичные адреса:
-balancer: 158.160.162.4
-bastion-host: 158.160.53.204
-kibana-server: 158.160.62.221
-zabbix-server: 89.169.157.10
+balancer: 158.160.162.4  
+bastion-host: 158.160.53.204  
+kibana-server: 158.160.62.221  
+zabbix-server: 89.169.157.10  
 
