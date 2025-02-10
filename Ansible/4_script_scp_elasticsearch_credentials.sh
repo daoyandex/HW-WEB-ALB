@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ANSIBLE_WORKING_FOLDER='/home/user/HW-WEB-ALB/Ansible'
+ANSIBLE_WORKING_FOLDER='~/HW-WEB-ALB/Ansible'
 bufferDIR=$ANSIBLE_WORKING_FOLDER/buffer
 
 bastion_host_ip='158.160.53.204'

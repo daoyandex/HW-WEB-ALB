@@ -121,7 +121,7 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
         [Управляющий скрипт](Ansible/Ansible_control_script.sh)  
     
     * В процессе получения elasticsearch credentials применяется копирование данных на управляющую машину (домшний ноутбук) через бастионный хост с последующим копированием нужных данных в каталоги ролей для сервера Kibana и машин группы web-серверов.  
-        [Скрипт получения elasticsearch credentials](Ansible/4_script_scp_elasticsearch_credentials.sh.sh)  
+        [Скрипт получения elasticsearch credentials](Ansible/4_script_scp_elasticsearch_credentials.sh)  
 
 4. Application load balancer  
 http://158.160.162.4/  
