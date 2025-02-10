@@ -149,7 +149,11 @@ zabbix
 2.2. Расписание снэпшотов дисков  
 ![Расписание снэпшотов дисков](img/Disks_Snapshot_Schedule.png)
 
-## 3. Публичные адреса:
+## 3. Скриншоты Zabbix dashboards  
+![Dashboard for web-vm-1](img/Dashboard_web_vm_1.png)  
+![Dashboard for web-vm-2](img/Dashboard_web_vm_2.png)  
+  
+## 4. Публичные адреса:
 balancer: 158.160.162.4  
 bastion-host: 158.160.53.204  
 kibana-server: 158.160.62.221  
