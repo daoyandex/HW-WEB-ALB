@@ -165,7 +165,7 @@ IEArc_VFMMG0oOg8C4M9
 ![Kibana Filebeat logs](img/Kibana_Filebeat_logs.png)  
 
 ## 5. Публичные адреса:
-balancer: 158.160.162.4  
+L7-balancer: 158.160.162.4  
 bastion-host: 158.160.53.204  
 kibana-server: 158.160.62.221  
 zabbix-server: 89.169.157.10  
