@@ -30,5 +30,5 @@ sudo sed -i -E 's/#protocol: \"https\"/protocol: \"https\"/g' $FILEBEAT_CONFIG
 
 # блок регулировки аутентификации
 sudo sed -i -E 's/#username: \"elastic\"/username: \"elastic\"/g' $FILEBEAT_CONFIG
-sudo sed -i -E "s/#password: \"changeme\"/password: $ES_PASSWORD\n  ssl:\n    enabled: true\n    ca_trusted_fingerprint: $ES_FINGERPRINT/g" $FILEBEAT_CONFIG
+sudo sed -i -E "s/#password:*/password: $ES_PASSWORD\n  ssl:\n    enabled: true\n    ca_trusted_fingerprint: $ES_FINGERPRINT/g" $FILEBEAT_CONFIG
 

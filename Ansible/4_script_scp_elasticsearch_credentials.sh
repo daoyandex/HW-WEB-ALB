@@ -1,8 +1,9 @@
 #!/bin/sh
 
-bufferDIR='/home/user/HW-WEB-ALB/Ansible/buffer'
+ANSIBLE_WORKING_FOLDER='/home/user/HW-WEB-ALB/Ansible'
+bufferDIR=$ANSIBLE_WORKING_FOLDER/buffer
 
-bastion_host_ip='84.252.130.47'
+bastion_host_ip='158.160.53.204'
 
 ssh-keygen -R elasticsearch-server.ru-central1.internal
 ssh-keygen -R kibana-server.ru-central1.internal
@@ -25,13 +26,13 @@ scp -o ProxyJump=yc-user@$bastion_host_ip yc-user@elasticsearch-server.ru-centra
 cat $bufferDIR/elastic_ca_fingerprint_full.txt | sed '1!d' | tr -d ": " | awk -F"=" '{ print $2 }' > $bufferDIR/elastic_ca_fingerprint.txt
 
 # 5. копируем elasticsearch credentials в каталог files роли role_web_vm_filebeat
-role_web_vm_filebeat_filesDIR=/home/user/HW-WEB-ZABBIX/Ansible/role_web_vm_filebeat/files
+role_web_vm_filebeat_filesDIR=$ANSIBLE_WORKING_FOLDER/role_web_vm_filebeat/files
 
 cp $bufferDIR/elastic_passwd.txt $role_web_vm_filebeat_filesDIR
 cp $bufferDIR/elastic_ca_fingerprint.txt $role_web_vm_filebeat_filesDIR
 
 # 6. копируем elasticsearch credentials в каталог files роли role_kibana_server
-role_kibana_server_filesDIR=/home/user/HW-WEB-ZABBIX/Ansible/role_kibana_server/files
+role_kibana_server_filesDIR=$ANSIBLE_WORKING_FOLDER/role_kibana_server/files
 
 cp $bufferDIR/elastic_passwd.txt $role_kibana_server_filesDIR
 #cp $bufferDIR/kibana_system_passwd.txt $role_kibana_server_filesDIR

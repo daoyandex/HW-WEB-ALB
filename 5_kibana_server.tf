@@ -7,9 +7,9 @@ resource "yandex_compute_instance" "kibana-server" {
     platform_id = "standard-v3"
     allow_stopping_for_update = true
 
-    scheduling_policy {
-        preemptible = true
-    }
+    #scheduling_policy {
+    #    preemptible = true
+    #}
 
     boot_disk {
         mode = "READ_WRITE"
@@ -29,7 +29,7 @@ resource "yandex_compute_instance" "kibana-server" {
     network_interface {
         subnet_id = "${yandex_vpc_subnet.alb-subnet-a.id}"
         security_group_ids = [yandex_vpc_security_group.kibana-sg.id]
-        nat = true  # к заблокированию
+        nat = true
     }
 
     metadata = { 

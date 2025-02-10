@@ -24,7 +24,7 @@ output "zabbix-vm-nat-ip-address" {
   value = "${data.yandex_compute_instance.zabbix-server.network_interface.0.nat_ip_address}"
 #  value = yandex_compute_instance.vm-tf-1.network_interface.0.nat_ip_address
 }
-##########################################################################################
+########################################################################################## -out /home/user/HW-WEB-ALB/plan_out.tf
 
 ##########################################################################################
 data "yandex_compute_instance" "kibana-server" {

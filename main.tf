@@ -176,7 +176,7 @@ resource "yandex_vpc_security_group" "zabbix-sg" {
     security_group_id = yandex_vpc_security_group.bastion-sg.id  # адрес откуда идет запрос
   }
 
-  # запросы из вне
+  # запросы извне
   ingress {
     description    = "HTTP requests"
 	  protocol       = "ANY"
@@ -233,23 +233,23 @@ resource "yandex_vpc_security_group" "alb-vm-sg" {
     security_group_id = yandex_vpc_security_group.zabbix-sg.id  # адрес откуда идет запрос
   }
 
-  # + к заблокированию. пока нужен для тестирования работы nginx через браузер
-  ingress {
-    description    = "HTTP requests"
-	  protocol       = "TCP" #ANY
-    v4_cidr_blocks = ["0.0.0.0/0"]  # адрес откуда идет запрос --- м.б. любым
-    from_port      = 80 #0
-    to_port        = 80 #65535 порт, по которому придет запрос
-  }
+  ## + к заблокированию. пока нужен для тестирования работы nginx через браузер
+  #ingress {
+  #  description    = "HTTP requests"
+	#  protocol       = "TCP" #ANY
+  #  v4_cidr_blocks = ["0.0.0.0/0"]  # адрес откуда идет запрос --- м.б. любым
+  #  from_port      = 80 #0
+  #  to_port        = 80 #65535 порт, по которому придет запрос
+  #}
   
-  # + к заблокированию. пока нужен для тестирования работы через ssh
-  ingress {
-    description    = "ANY"
-	  protocol       = "ANY"
-    v4_cidr_blocks = ["0.0.0.0/0"]  # адрес откуда идет запрос --- м.б. любым
-    from_port      = 0
-    to_port        = 65535 # порт, по которому придет запрос
-  }
+  ## + к заблокированию. пока нужен для тестирования работы через ssh
+  #ingress {
+  #  description    = "ANY"
+	#  protocol       = "ANY"
+  #  v4_cidr_blocks = ["0.0.0.0/0"]  # адрес откуда идет запрос --- м.б. любым
+  #  from_port      = 0
+  #  to_port        = 65535 # порт, по которому придет запрос
+  #}
 }
 ##########################################################################################
 
@@ -300,7 +300,7 @@ resource "yandex_vpc_security_group" "kibana-sg" {
     port = 5601
   }
 
-  ## + на вход (для теста при nat=true) - к заблокированию
+  # + на вход (для теста при nat=true) - к заблокированию
   #ingress {
   #  description    = "HTTP requests"
 	#  protocol       = "TCP" #ANY
@@ -333,7 +333,7 @@ resource "yandex_vpc_security_group" "elasticsearch-sg" {
   # ++ правило для исходящего трафика
   egress {
     description    = "ANY egress rule description"
-	protocol       = "ANY"
+    protocol       = "ANY"
     v4_cidr_blocks = ["0.0.0.0/0"]  # адрес откуда идет запрос --- м.б. любым
     from_port      = 0
     to_port        = 65535 # порт, по которому придет запрос
@@ -342,7 +342,7 @@ resource "yandex_vpc_security_group" "elasticsearch-sg" {
   # взаимодействие с bastion-host
   ingress {
     description    = "bastion"
-	protocol       = "TCP"
+    protocol       = "TCP"
     port = 22 # порт, по которому придет запрос от бастионного хоста
     security_group_id = yandex_vpc_security_group.bastion-sg.id  # адрес откуда идет запрос
   }
@@ -350,7 +350,7 @@ resource "yandex_vpc_security_group" "elasticsearch-sg" {
   # взаимодействие с kibana-server
   ingress {
     description    = "kibana"
-	protocol       = "ANY"
+    protocol       = "ANY"
     from_port      = 0
     to_port        = 65535
     security_group_id = yandex_vpc_security_group.kibana-sg.id  # адрес откуда идет запрос
@@ -359,7 +359,7 @@ resource "yandex_vpc_security_group" "elasticsearch-sg" {
     # взаимодействие с группой web-vm
   ingress {
     description    = "filebeat"
-	protocol       = "ANY"
+	  protocol       = "ANY"
     from_port      = 0
     to_port        = 65535
     security_group_id = yandex_vpc_security_group.alb-vm-sg.id  # адрес откуда идет запрос

@@ -15,9 +15,9 @@ resource "yandex_compute_instance_group" "alb-vm-group" {
 		  core_fraction = 20
 		  memory = 1
 	  }
-    scheduling_policy {
-		 preemptible = true
-	  }
+    #scheduling_policy {
+		# preemptible = true
+	  #}
     boot_disk {
 		  mode = "READ_WRITE"
       initialize_params {
@@ -30,7 +30,7 @@ resource "yandex_compute_instance_group" "alb-vm-group" {
       network_id = yandex_vpc_network.alb-network.id
       subnet_ids = ["${yandex_vpc_subnet.alb-subnet-b.id}", "${yandex_vpc_subnet.alb-subnet-d.id}"]
       security_group_ids = ["${yandex_vpc_security_group.alb-vm-sg.id}"]
-      nat = true
+    #  nat = true
     }
     
     metadata = { 
@@ -60,6 +60,7 @@ resource "yandex_compute_instance_group" "alb-vm-group" {
 }
 ##########################################################################################
 
+##########################################################################################
 # Целевую группу Application Load Balancer нужно привязать к группе бэкендов,
 # а группу бэкендов — к балансировщику, напрямую или через HTTP-роутер, в зависимости от типа балансировки. 
 # Подробнее см. в инструкциях по управлению ресурсами Application Load Balancer.

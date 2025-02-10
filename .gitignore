@@ -3,7 +3,7 @@ addons/
 passwd.yml
 .terraform/
 .terraform*
-README*
+_README*
 *.backup
 *.json
 *.txt

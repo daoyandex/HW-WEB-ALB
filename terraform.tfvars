@@ -1,6 +1,6 @@
 sa_web_alb_id = "aje99pl9vi4hs1mbe8ak"
 
-domain = "alb-example.com"
+#domain = "alb-example.com"
 
 web_cluster_size = 2
 
