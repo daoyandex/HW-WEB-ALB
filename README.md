@@ -139,14 +139,17 @@ IEArc_VFMMG0oOg8C4M9
 2.1. Карта облачной сети  
 ![VPC_Map](img/VPC_Map.png)
 
-2.2. Балансировщик L-7 уровня  
+2.2. Группы безопасности  
+![Sequre groups](img/Sequre_groups.png)  
+  
+2.3. Балансировщик L-7 уровня  
 ![Application load balancer](img/Application_load_balancer.png)  
 ![ALB specification](img/ALB_specification.png)  
 
-2.3. Полный перечень созданных ВМ:   
+2.4. Полный перечень созданных ВМ:   
 ![Полный перечень ВМ](img/VM_full_list.png)
 
-2.2. Расписание снэпшотов дисков  
+2.5. Расписание снэпшотов дисков  
 ![Расписание снэпшотов дисков](img/Disks_Snapshot_Schedule.png)
 
 ## 3. Скриншоты Zabbix dashboards  
