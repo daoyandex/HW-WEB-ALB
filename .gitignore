@@ -2,6 +2,7 @@ addons/
 passwd.yml
 .terraform/
 .terraform*
+*.tfstate
 _README*
 *.backup
 *.json
