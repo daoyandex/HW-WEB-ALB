@@ -11,6 +11,12 @@ else
   echo "$DIRECTORY exists."
 fi
 
+# памяка по удалению
+sudo dpkg --remove kibana
+sudo apt-get remove --purge kibana
+sudo rm -rf /etc/kibana
+sudo rm -rf /var/lib/kibana
+
 # wget -O $DIRECTORY/kibana.deb https://artifacts.elastic.co/downloads/kibana/kibana-8.17.0-amd64.deb
 # установим deb-пакет kibana
 sudo dpkg -i $DIRECTORY/kibana.deb

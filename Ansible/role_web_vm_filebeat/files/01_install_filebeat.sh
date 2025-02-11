@@ -11,6 +11,13 @@ else
   echo "$DIRECTORY exists."
 fi
 
+
+# памяка по удалению
+sudo dpkg --remove filebeat
+sudo apt-get remove --purge filebeat
+sudo rm -rf /etc/filebeat
+sudo rm -rf /var/lib/filebeat
+
 # установим deb-пакет filebeat
 if [ -f "$DIRECTORY/filebeat.deb" ]; then
   sudo dpkg -i $DIRECTORY/filebeat.deb

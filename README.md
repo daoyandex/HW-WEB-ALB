@@ -119,7 +119,7 @@ Cоздайте ВМ, разверните на ней Elasticsearch. Устан
 Для работы с виртуальными машинами за бастионным хостом применяется способ указания общего ssh-аргумента (для всех групп хостов) с адресом bastion-host:  
 ``` bash
 [all:vars]
-ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q yc-user@158.160.53.204"'
+ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q yc-user@62.84.119.111"'
 ```  
 3. Порядок установки ПО на вирутальные машины системы - регламентированный, поскольку имеются зависимости. Например, установка Kibana и Filebeat выполняется строго после установки Elasticsearch и опирается на соответствующие параметры аутентификации (пользователь elastic и его пароль, отпечаток сертификата CA Elasticsearch, enrollment token для Kibana).    
     3.1. Для соблюдения правильного порядка установки ПО предусмотрен управляющий скрипт  
@@ -129,16 +129,16 @@ ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q yc-user@158.160.53.204
         [Скрипт получения elasticsearch credentials](Ansible/4_script_scp_elasticsearch_credentials.sh)  
 
 4. Application load balancer  
-http://158.160.162.4/  
+http://51.250.32.175/ 
 ! На виртуальных машинах с веб-сервером Nginx намеренно сделаны веб-страницы с различным контентом - отображается имя ВМ того веб-сервера, который отвечает при вызове адреса балансировщика. Сделано для удобства контроля работы обеих ВМ веб-сервера.  
   
-5. Для подключения к серверу Zabbix (http://89.169.157.10/zabbix) используются логин-пароль:   
+5. Для подключения к серверу Zabbix (http://89.169.133.219/zabbix) используются логин-пароль:   
 Admin  
 zabbix  
   
-6. Для подключения к серверу Kibana (http://158.160.62.221:5601) используются логин-пароль:  
+6. Для подключения к серверу Kibana (http://89.169.145.216:5601) используются логин-пароль:  
 elastic  
-IEArc_VFMMG0oOg8C4M9  
+ 
     
 ## 2. Скриншоты ресурсов  
 2.1. Карта облачной сети  
@@ -148,8 +148,8 @@ IEArc_VFMMG0oOg8C4M9
 ![Sequre groups](img/Sequre_groups.png)  
   
 2.3. Балансировщик L-7 уровня  
-![Application load balancer](img/Application_load_balancer.png)  
-![ALB specification](img/ALB_specification.png)  
+![Application load balancer](img/alb.png)  
+![ALB specification](img/alb_specification.png)  
 
 2.4. Полный перечень созданных ВМ:   
 ![Полный перечень ВМ](img/VM_full_list.png)
@@ -165,8 +165,8 @@ IEArc_VFMMG0oOg8C4M9
 ![Kibana Filebeat logs](img/Kibana_Filebeat_logs.png)  
 
 ## 5. Публичные адреса:
-L7-balancer: 158.160.162.4  
-bastion-host: 158.160.53.204  
-kibana-server: 158.160.62.221  
-zabbix-server: 89.169.157.10  
+L7-balancer: [51.250.32.175/](http://51.250.32.175/)
+bastion-host: 62.84.119.111 
+kibana-server: [http://89.169.145.216:5601/](http://89.169.145.216:5601/app/observability-logs-explorer/?pageState=(breakdownField:log.level,columns:!(),controls:(data_stream.namespace:(mode:include,selection:(selectedOptions:!(),type:options))),dataSourceSelection:(selectionType:all),filters:!(),query:(language:kuery,query:%27%27),refreshInterval:(pause:!t,value:60000),rowHeight:0,rowsPerPage:100,time:(from:now-15m,to:now),v:2))  
+zabbix-server: [89.169.133.219](http://89.169.133.219/zabbix/zabbix.php?action=dashboard.list) 
 

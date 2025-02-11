@@ -13,11 +13,11 @@ resource "yandex_compute_instance_group" "alb-vm-group" {
     resources {
 		  cores  = 2
 		  core_fraction = 20
-		  memory = 1
+		  memory = 2
 	  }
-    #scheduling_policy {
-		# preemptible = true
-	  #}
+    scheduling_policy {
+		 preemptible = true
+	  }
     boot_disk {
 		  mode = "READ_WRITE"
       initialize_params {

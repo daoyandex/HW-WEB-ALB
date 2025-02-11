@@ -7,9 +7,9 @@ resource "yandex_compute_instance" "kibana-server" {
     platform_id = "standard-v3"
     allow_stopping_for_update = true
 
-    #scheduling_policy {
-    #    preemptible = true
-    #}
+    scheduling_policy {
+        preemptible = true
+    }
 
     boot_disk {
         mode = "READ_WRITE"
@@ -23,7 +23,7 @@ resource "yandex_compute_instance" "kibana-server" {
     resources {
         cores  = 2
         core_fraction = 20
-        memory = 1
+        memory = 2
     }
 
     network_interface {

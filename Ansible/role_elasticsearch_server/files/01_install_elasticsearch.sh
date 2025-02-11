@@ -11,15 +11,17 @@ else
   echo "$DIRECTORY exists."
 fi
 
+# памяка по удалению ES
+sudo dpkg --remove elasticsearch
+sudo apt-get remove --purge elasticsearch
+sudo rm -rf /etc/elasticsearch
+sudo rm -rf /var/lib/elasticsearch
+
 #wget -O $DIRECTORY/elasticsearch.deb https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.17.0-amd64.deb
 # установим deb-пакет elasticsearch
 sudo dpkg -i $DIRECTORY/elasticsearch.deb
 sudo systemctl daemon-reload
 
 
-# памяка по удалению ES
-#sudo dpkg --remove elasticsearch
-#sudo apt-get remove --purge elasticsearch
-#sudo rm -rf /etc/elasticsearch
-#sudo rm -rf /var/lib/elasticsearch
+
 

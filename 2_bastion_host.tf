@@ -7,16 +7,16 @@ resource "yandex_compute_instance" "bastion-host" {
     platform_id = "standard-v3"
     allow_stopping_for_update = true
 
-    #scheduling_policy {
-    #    preemptible = true
-    #}
+    scheduling_policy {
+        preemptible = true
+    }
 
     boot_disk {
         mode = "READ_WRITE"
         initialize_params {
             image_id = var.boot_disk_image_debian_12
             type = "network-hdd"
-            size = 5
+            size = 7
         }
     }
 
