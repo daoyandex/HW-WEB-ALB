@@ -18,7 +18,7 @@ ansible-playbook 3_runrole_elasticsearch_server.yml
 
 # 4. Скрипт копирования elasticsearch credentials на текущую (управляющую) машину
 ## в каталог ~/HW-WEB-ALB/Ansible/buffer
-4_script_scp_elasticsearch_credentials.sh
+sh 4_script_scp_elasticsearch_credentials.sh
 # elastic_ca_fingerprint.txt
 # elastic_passwd.txt
 
