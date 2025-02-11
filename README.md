@@ -165,8 +165,8 @@ elastic
 ![Kibana Filebeat logs](img/Kibana_Filebeat_logs.png)  
 
 ## 5. Публичные адреса:
-L7-balancer: [51.250.32.175/](http://51.250.32.175/)
-bastion-host: 62.84.119.111 
-kibana-server: [http://89.169.145.216:5601/](http://89.169.145.216:5601/app/observability-logs-explorer/?pageState=(breakdownField:log.level,columns:!(),controls:(data_stream.namespace:(mode:include,selection:(selectedOptions:!(),type:options))),dataSourceSelection:(selectionType:all),filters:!(),query:(language:kuery,query:%27%27),refreshInterval:(pause:!t,value:60000),rowHeight:0,rowsPerPage:100,time:(from:now-15m,to:now),v:2))  
-zabbix-server: [89.169.133.219](http://89.169.133.219/zabbix/zabbix.php?action=dashboard.list) 
+L7-balancer: [51.250.32.175/](http://51.250.32.175/)  
+bastion-host: 62.84.119.111  
+kibana-server: [http://89.169.145.216:5601/](http://89.169.145.216:5601/app/observability-logs-explorer/?pageState=(breakdownField:log.level,columns:!(),controls:(data_stream.namespace:(mode:include,selection:(selectedOptions:!(),type:options))),dataSourceSelection:(selectionType:all),filters:!(),query:(language:kuery,query:%27%27),refreshInterval:(pause:!t,value:60000),rowHeight:0,rowsPerPage:100,time:(from:now-15m,to:now),v:2))   
+zabbix-server: [89.169.133.219](http://89.169.133.219/zabbix/zabbix.php?action=dashboard.list)  
 
